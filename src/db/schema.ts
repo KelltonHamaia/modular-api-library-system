@@ -21,8 +21,8 @@ export const books = pgTable('books', {
   ...idHelper,
   title: varchar({ length: 255 }).notNull(),
   author: varchar({ length: 255 }).notNull(),
-  total_copies: integer().notNull(),
-  available_copies: integer().notNull(),
+  totalCopies: integer().notNull(),
+  availableCopies: integer().notNull(),
 })
 
 export const STATUS = pgEnum('status', ['ACTIVE', 'SUSPENDED'])
