@@ -5,3 +5,4 @@ export const bookRoutes = Router()
 
 bookRoutes.post('/', controller.postCreateBook)
 bookRoutes.get('/', controller.getBooks)
+bookRoutes.get('/:id', controller.getBookById)

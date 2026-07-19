@@ -1,7 +1,7 @@
 import { db } from '@/db/client.js'
 import { books } from '@/db/schema.js'
-import { eq } from 'drizzle-orm'
 import { BookRepository } from '@/modules/books/domain/books.repository.js'
+import { eq } from 'drizzle-orm'
 
 export const bookData: BookRepository = {
   async titleExists(title) {
@@ -19,5 +19,10 @@ export const bookData: BookRepository = {
 
   async listBooks() {
     return await db.select().from(books)
+  },
+
+  async getBookById(id) {
+    const [book] = await db.select().from(books).where(eq(books.id, id))
+    return book ?? null
   },
 }

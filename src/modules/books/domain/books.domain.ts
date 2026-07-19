@@ -1,4 +1,5 @@
-import { ConflictError } from '@/shared/errors/error.shared.js'
+import { ConflictError, NotFoundError } from '@/shared/errors/error.shared.js'
+import { Book } from '@/modules/books/domain/books.type.js'
 
 export const assertBookDoesNotExist = (
   exists: boolean,
@@ -13,4 +14,9 @@ export const calculateInitialAvailableCopies = (
   totalCopies: number,
 ): number => {
   return totalCopies
+}
+
+export const assertBookExists = (book: Book | null): Book => {
+  if (!book) throw new NotFoundError()
+  return book
 }

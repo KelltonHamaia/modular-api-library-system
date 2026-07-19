@@ -6,4 +6,8 @@ const createBookSchema = z.object({
   totalCopies: z.number().int().min(1),
 })
 
-export { createBookSchema }
+const getBookByIdSchema = z.object({
+  id: z.uuid(),
+})
+
+export { createBookSchema, getBookByIdSchema }

@@ -23,3 +23,11 @@ export const createBook = async (
 export const listBooks = async (repository: BookRepository = bookData) => {
   return await repository.listBooks()
 }
+
+export const getBookById = async (
+  id: string,
+  repository: BookRepository = bookData,
+) => {
+  const book = await repository.getBookById(id)
+  return domain.assertBookExists(book)
+}
