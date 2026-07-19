@@ -16,4 +16,8 @@ export const bookData: BookRepository = {
     const [newBook] = await db.insert(books).values(createBookInput).returning()
     return newBook
   },
+
+  async listBooks() {
+    return await db.select().from(books)
+  },
 }

@@ -19,3 +19,7 @@ export const createBook = async (
 
   return newBook
 }
+
+export const listBooks = async (repository: BookRepository = bookData) => {
+  return await repository.listBooks()
+}

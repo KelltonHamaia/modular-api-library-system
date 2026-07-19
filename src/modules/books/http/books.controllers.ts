@@ -8,3 +8,8 @@ export const postCreateBook: RequestHandler = async (req, res) => {
   const result = await service.createBook(payload)
   return res.status(200).json({ result })
 }
+
+export const getBooks: RequestHandler = async (req, res) => {
+  const result = await service.listBooks()
+  return res.status(200).json({ result })
+}

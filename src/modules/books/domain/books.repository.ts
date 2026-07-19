@@ -5,4 +5,5 @@ type CreateBookInputArgs = CreateBookInput & { availableCopies: number }
 export type BookRepository = {
   titleExists: (title: string) => Promise<boolean>
   createBook: (createBookInput: CreateBookInputArgs) => Promise<Book>
+  listBooks: () => Promise<Book[]>
 }
