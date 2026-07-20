@@ -13,10 +13,11 @@ export const assertEmailNotExists = (exists: boolean) => {
   }
 }
 
-export const assertMemberExists = (member: Member | null) => {
+export const ensureMemberExists = (member: Member | null) => {
   if (!member) {
     throw new NotFoundError()
   }
+  return member
 }
 
 export const buildNewMember = (
