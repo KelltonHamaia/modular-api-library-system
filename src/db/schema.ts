@@ -37,12 +37,14 @@ export const members = pgTable('members', {
 export const loans = pgTable('loans', {
   ...idHelper,
   loanDate: timestamp().notNull().defaultNow(),
-  dueDate: timestamp()
-    .notNull()
-    .default(sql`now() + interval '14 days'`),
+  dueDate: timestamp().notNull(),
   returnDate: timestamp(),
-  overdue: boolean().notNull(),
+  overdue: boolean().notNull().default(false),
 
-  bookId: uuid().references(() => books.id),
-  memberId: uuid().references(() => members.id),
+  bookId: uuid()
+    .notNull()
+    .references(() => books.id),
+  memberId: uuid()
+    .notNull()
+    .references(() => members.id),
 })
