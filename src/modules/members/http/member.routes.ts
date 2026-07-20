@@ -4,3 +4,4 @@ import { Router } from 'express'
 export const memberRoutes = Router()
 
 memberRoutes.post('/', controller.postCreateMember)
+memberRoutes.get('/:id', controller.getMemberById)

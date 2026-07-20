@@ -15,3 +15,12 @@ export const createMember = async (
 
   return newMember
 }
+
+export const getMemberById = async (
+  id: string,
+  repository: MemberRepository = memberData,
+) => {
+  const member = await repository.getMemberById(id)
+  domain.assertMemberExists(member)
+  return member
+}

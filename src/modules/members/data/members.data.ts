@@ -16,4 +16,9 @@ export const memberData: MemberRepository = {
     const [newMember] = await db.insert(members).values(input).returning()
     return newMember
   },
+
+  async getMemberById(id) {
+    const [member] = await db.select().from(members).where(eq(members.id, id))
+    return member ?? null
+  },
 }
