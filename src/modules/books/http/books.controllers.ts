@@ -7,7 +7,7 @@ import {
   createBookSchema,
   getBookByIdSchema,
 } from '@/modules/books/http/books.schemas.js'
-import * as service from '@/modules/books/books.services.js'
+import * as service from '@/modules/books/books.service.js'
 
 export const postCreateBook: RequestHandler = async (req, res) => {
   const payload = validateRequestBody(createBookSchema, req)

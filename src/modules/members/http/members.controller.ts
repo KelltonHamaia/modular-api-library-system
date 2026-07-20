@@ -3,7 +3,7 @@ import {
   memberIdParamsSchema,
   updateMemberStatusSchema,
 } from '@/modules/members/http/members.schema.js'
-import * as service from '@/modules/members/members.services.js'
+import * as service from '@/modules/members/members.service.js'
 import {
   validateRequestBody,
   validateRequestParams,
