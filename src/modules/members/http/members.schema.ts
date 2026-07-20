@@ -5,6 +5,6 @@ export const createMemberSchema = z.object({
   email: z.email(),
 })
 
-export const getMemberByIdSchema = z.object({
+export const memberIdParamsSchema = z.object({
   id: z.uuid(),
 })
