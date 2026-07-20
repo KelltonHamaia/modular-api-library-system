@@ -8,3 +8,7 @@ export const createMemberSchema = z.object({
 export const memberIdParamsSchema = z.object({
   id: z.uuid(),
 })
+
+export const updateMemberStatusSchema = z.object({
+  status: z.enum(['ACTIVE', 'SUSPENDED']),
+})

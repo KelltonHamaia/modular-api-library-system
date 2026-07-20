@@ -1,6 +1,9 @@
 import { MemberRepository } from '@/modules/members/data/members.repository.js'
 import { memberData } from '@/modules/members/data/members.data.js'
-import { CreateMemberInput } from '@/modules/members/domain/members.type.js'
+import {
+  CreateMemberInput,
+  MEMBER_STATUS,
+} from '@/modules/members/domain/members.type.js'
 import * as domain from '@/modules/members/domain/members.domain.js'
 
 export const createMember = async (
@@ -23,4 +26,26 @@ export const getMemberById = async (
   const rawMember = await repository.findMemberById(id)
   const member = domain.ensureMemberExists(rawMember)
   return member
+}
+
+export const updateMemberStatusById = async (
+  id: string,
+  status: MEMBER_STATUS,
+  repository: MemberRepository = memberData,
+) => {
+  const rawMember = await repository.findMemberById(id)
+  const member = domain.ensureMemberExists(rawMember)
+
+  if (member.status === status) {
+    return {
+      member: member,
+      statusChanged: false,
+    }
+  }
+
+  const updatedMember = await repository.updateMemberStatusById(id, status)
+  return {
+    member: updatedMember,
+    statusChanged: true,
+  }
 }

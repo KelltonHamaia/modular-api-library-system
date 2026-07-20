@@ -21,4 +21,13 @@ export const memberData: MemberRepository = {
     const [member] = await db.select().from(members).where(eq(members.id, id))
     return member ?? null
   },
+
+  async updateMemberStatusById(id, status) {
+    const [member] = await db
+      .update(members)
+      .set({ status })
+      .where(eq(members.id, id))
+      .returning()
+    return member
+  },
 }
