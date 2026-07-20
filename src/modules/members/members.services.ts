@@ -20,7 +20,7 @@ export const getMemberById = async (
   id: string,
   repository: MemberRepository = memberData,
 ) => {
-  const member = await repository.getMemberById(id)
+  const member = await repository.findMemberById(id)
   domain.assertMemberExists(member)
   return member
 }

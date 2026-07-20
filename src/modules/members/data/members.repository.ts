@@ -9,5 +9,6 @@ type CreateMemberRepositoryInput = CreateMemberInput & { status: MEMBER_STATUS }
 export type MemberRepository = {
   emailExists: (email: string) => Promise<boolean>
   createMember: (input: CreateMemberRepositoryInput) => Promise<Member>
-  getMemberById: (id: string) => Promise<Member | null>
+  findMemberById: (id: string) => Promise<Member | null>
+  updateMemberStatusById: (id: string, status: MEMBER_STATUS) => Promise<Member>
 }

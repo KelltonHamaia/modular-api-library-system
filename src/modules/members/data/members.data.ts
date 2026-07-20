@@ -17,7 +17,7 @@ export const memberData: MemberRepository = {
     return newMember
   },
 
-  async getMemberById(id) {
+  async findMemberById(id) {
     const [member] = await db.select().from(members).where(eq(members.id, id))
     return member ?? null
   },
