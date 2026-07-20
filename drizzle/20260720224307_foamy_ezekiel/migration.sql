@@ -1,0 +1,3 @@
+ALTER TABLE "loans" ALTER COLUMN "loanDate" SET DATA TYPE timestamp with time zone USING "loanDate"::timestamp with time zone;--> statement-breakpoint
+ALTER TABLE "loans" ALTER COLUMN "dueDate" SET DATA TYPE timestamp with time zone USING "dueDate"::timestamp with time zone;--> statement-breakpoint
+ALTER TABLE "loans" ALTER COLUMN "returnDate" SET DATA TYPE timestamp with time zone USING "returnDate"::timestamp with time zone;

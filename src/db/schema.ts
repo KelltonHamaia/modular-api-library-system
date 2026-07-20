@@ -36,9 +36,9 @@ export const members = pgTable('members', {
 
 export const loans = pgTable('loans', {
   ...idHelper,
-  loanDate: timestamp().notNull().defaultNow(),
-  dueDate: timestamp().notNull(),
-  returnDate: timestamp(),
+  loanDate: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  dueDate: timestamp({ withTimezone: true }).notNull(),
+  returnDate: timestamp({ withTimezone: true }),
   overdue: boolean().notNull().default(false),
 
   bookId: uuid()
