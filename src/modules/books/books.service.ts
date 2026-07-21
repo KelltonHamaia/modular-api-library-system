@@ -25,9 +25,23 @@ export const listBooks = async (repository: BookRepository = bookData) => {
 }
 
 export const getBookById = async (
-  id: string,
+  bookId: string,
   repository: BookRepository = bookData,
 ) => {
-  const book = await repository.getBookById(id)
+  const book = await repository.findBookById(bookId)
   return domain.assertBookExists(book)
+}
+
+export const countAvailableCopies = async (
+  bookId: string,
+  repository: BookRepository = bookData,
+) => {
+  return repository.getTotalAvailableCopies(bookId)
+}
+
+export const decreaseAvailableCopy = async (
+  bookId: string,
+  repository: BookRepository = bookData,
+) => {
+  return await repository.decreaseAvailableCopy(bookId)
 }

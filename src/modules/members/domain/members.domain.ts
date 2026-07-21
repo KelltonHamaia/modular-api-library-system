@@ -1,4 +1,8 @@
-import { ConflictError, NotFoundError } from '@/shared/errors/error.shared.js'
+import {
+  BusinessRuleError,
+  ConflictError,
+  NotFoundError,
+} from '@/shared/errors/error.shared.js'
 import {
   CreateMemberInput,
   Member,
@@ -18,6 +22,11 @@ export const ensureMemberExists = (member: Member | null) => {
     throw new NotFoundError()
   }
   return member
+}
+
+export const assertMemberIsActive = (member: Member) => {
+  if (member.status !== 'ACTIVE')
+    throw new BusinessRuleError('Member is not active, unable to make a loan')
 }
 
 export const buildNewMember = (

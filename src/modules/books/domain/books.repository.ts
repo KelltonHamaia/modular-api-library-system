@@ -6,5 +6,7 @@ export type BookRepository = {
   titleExists: (title: string) => Promise<boolean>
   createBook: (createBookInput: CreateBookInputArgs) => Promise<Book>
   listBooks: () => Promise<Book[]>
-  getBookById: (id: string) => Promise<Book | null>
+  findBookById: (bookId: string) => Promise<Book | null>
+  getTotalAvailableCopies: (bookId: string) => Promise<number>
+  decreaseAvailableCopy: (bookId: string) => Promise<Book>
 }

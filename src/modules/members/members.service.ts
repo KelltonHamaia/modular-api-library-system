@@ -28,6 +28,16 @@ export const getMemberById = async (
   return member
 }
 
+export const getActiveMemberById = async (
+  id: string,
+  repository: MemberRepository = memberData,
+) => {
+  const rawMember = await repository.findMemberById(id)
+  const member = domain.ensureMemberExists(rawMember)
+  domain.assertMemberIsActive(member) // já embutido aqui
+  return member
+}
+
 export const updateMemberStatusById = async (
   id: string,
   status: MEMBER_STATUS,
