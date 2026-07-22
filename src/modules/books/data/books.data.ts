@@ -1,7 +1,7 @@
 import { db } from '@/db/client.js'
 import { books } from '@/db/schema.js'
 import { BookRepository } from '@/modules/books/domain/books.repository.js'
-import { and, eq, gt, sql } from 'drizzle-orm'
+import { and, eq, gt, lt, sql } from 'drizzle-orm'
 
 export const bookData: BookRepository = {
   async titleExists(title) {
@@ -34,12 +34,25 @@ export const bookData: BookRepository = {
     return book.totalCopies
   },
 
-  async decreaseAvailableCopy(bookId: string) {
+  async decreaseAvailableCopy(bookId) {
     const [book] = await db
       .update(books)
       .set({ availableCopies: sql`${books.availableCopies} - 1` })
       .where(and(eq(books.id, bookId), gt(books.availableCopies, 0)))
       .returning()
     return book
+  },
+
+  async increaseAvailableCopy(bookId) {
+    const [book] = await db
+      .update(books)
+      .set({
+        availableCopies: sql`${books.availableCopies} + 1`,
+      })
+      .where(
+        and(eq(books.id, bookId), lt(books.availableCopies, books.totalCopies)),
+      )
+      .returning()
+    return book ?? null
   },
 }

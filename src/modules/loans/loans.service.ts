@@ -1,6 +1,7 @@
 import {
   countAvailableCopies,
   decreaseAvailableCopy,
+  increaseAvailableCopy,
 } from '@/modules/books/index.js'
 import { loansData } from '@/modules/loans/data/loans.data.js'
 import * as domain from '@/modules/loans/domain/loans.domain.js'
@@ -30,4 +31,15 @@ export const createLoan = async (
   const newLoan = await repository.createLoan(buildLoan)
   await decreaseAvailableCopy(bookId)
   return { newLoan }
+}
+
+export const returnLoan = async (
+  loanId: string,
+  repository: LoansRepository = loansData,
+) => {
+  const loan = await repository.getLoanById(loanId)
+  const builtReturnedLoan = domain.buildReturnedLoan(loan)
+  const updated = await repository.updateLoan(builtReturnedLoan)
+  await increaseAvailableCopy(updated.bookId)
+  return updated
 }

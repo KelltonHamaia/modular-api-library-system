@@ -2,6 +2,7 @@ import { BusinessRuleError } from '@/shared/errors/error.shared.js'
 import { Loan } from '@/modules/loans/domain/loans.type.js'
 
 const LOANS_PER_MEMBER = 3
+const RETURN_DATE = new Date()
 
 const calculateDueDate = () => {
   const dueDate = new Date()
@@ -38,5 +39,13 @@ export const buildNewLoan = (
     loanDate: new Date(),
     returnDate: null,
     overdue: false,
+  }
+}
+
+export const buildReturnedLoan = (loan: Loan): Loan => {
+  return {
+    ...loan,
+    returnDate: RETURN_DATE,
+    overdue: loan.dueDate < RETURN_DATE,
   }
 }

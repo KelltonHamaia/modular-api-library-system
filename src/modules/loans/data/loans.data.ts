@@ -32,4 +32,18 @@ export const loansData: LoansRepository = {
       )
     return loan ?? null
   },
+
+  async getLoanById(loanId) {
+    const [loan] = await db.select().from(loans).where(eq(loans.id, loanId))
+    return loan
+  },
+
+  async updateLoan(loan) {
+    const [updatedLoan] = await db
+      .update(loans)
+      .set(loan)
+      .where(eq(loans.id, loan.id))
+      .returning()
+    return updatedLoan
+  },
 }

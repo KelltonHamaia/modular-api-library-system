@@ -8,4 +8,6 @@ export type LoansRepository = {
     memberId: string,
     bookId: string,
   ) => Promise<Loan | null>
+  getLoanById: (loanId: string) => Promise<Loan>
+  updateLoan: (loan: Loan) => Promise<Loan>
 }

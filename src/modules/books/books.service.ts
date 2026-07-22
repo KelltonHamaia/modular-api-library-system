@@ -45,3 +45,10 @@ export const decreaseAvailableCopy = async (
 ) => {
   return await repository.decreaseAvailableCopy(bookId)
 }
+
+export const increaseAvailableCopy = async (
+  bookId: string,
+  repository: BookRepository = bookData,
+) => {
+  return await repository.increaseAvailableCopy(bookId)
+}

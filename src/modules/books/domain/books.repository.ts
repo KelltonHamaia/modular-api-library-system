@@ -9,4 +9,5 @@ export type BookRepository = {
   findBookById: (bookId: string) => Promise<Book | null>
   getTotalAvailableCopies: (bookId: string) => Promise<number>
   decreaseAvailableCopy: (bookId: string) => Promise<Book>
+  increaseAvailableCopy: (bookId: string) => Promise<Book | null>
 }
