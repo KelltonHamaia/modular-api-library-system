@@ -16,7 +16,7 @@ export const assertBookHasAvailableCopy = (availableCopies: number) => {
 }
 
 export const assertMemberIsWithinLoanLimit = (loansByMember: number) => {
-  if (loansByMember >= LOANS_PER_MEMBER) {
+  if (loansByMember === LOANS_PER_MEMBER) {
     throw new BusinessRuleError(
       `Member reached maximum loan limit (${LOANS_PER_MEMBER})`,
     )
