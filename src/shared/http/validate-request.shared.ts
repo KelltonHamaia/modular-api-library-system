@@ -8,3 +8,7 @@ export const validateRequestBody = <T>(schema: ZodType<T>, req: Request) => {
 export const validateRequestParams = <T>(schema: ZodType<T>, req: Request) => {
   return schema.parse(req.params)
 }
+
+export const validateRequestQuery = <T>(schema: ZodType<T>, req: Request) => {
+  return schema.parse(req.query)
+}

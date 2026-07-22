@@ -46,4 +46,37 @@ export const loansData: LoansRepository = {
       .returning()
     return updatedLoan
   },
+
+  async findLoansByMemberId(memberId) {
+    return await db
+      .select({
+        memberId: loans.memberId,
+        title: books.title,
+        returnDate: loans.returnDate,
+        dueDate: loans.dueDate,
+        overdue: loans.overdue,
+      })
+      .from(loans)
+      .innerJoin(books, eq(loans.bookId, books.id))
+      .where(eq(loans.memberId, memberId))
+  },
+  async findLoans() {
+    return await db
+      .select({
+        memberId: loans.memberId,
+        title: books.title,
+        returnDate: loans.returnDate,
+        dueDate: loans.dueDate,
+        overdue: loans.overdue,
+      })
+      .from(loans)
+      .innerJoin(books, eq(loans.bookId, books.id))
+      .groupBy(
+        loans.memberId,
+        books.title,
+        loans.returnDate,
+        loans.dueDate,
+        loans.overdue,
+      )
+  },
 }

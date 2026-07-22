@@ -12,3 +12,7 @@ export const getLoanByIdSchema = z.object({
 export const patchReturnLoanSchema = z.object({
   returnDate: z.date(),
 })
+
+export const getLoansFromMemberId = z.object({
+  memberId: z.uuid().optional(),
+})

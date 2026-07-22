@@ -43,3 +43,16 @@ export const returnLoan = async (
   await increaseAvailableCopy(updated.bookId)
   return updated
 }
+
+export const getLoans = async (repository: LoansRepository = loansData) => {
+  const loans = repository.findLoans()
+  return loans
+}
+
+export const getLoansFromMember = async (
+  memberId: string,
+  repository: LoansRepository = loansData,
+) => {
+  const loans = await repository.findLoansByMemberId(memberId)
+  return loans
+}
