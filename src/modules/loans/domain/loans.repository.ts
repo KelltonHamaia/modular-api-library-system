@@ -16,7 +16,7 @@ export type LoansRepository = {
     memberId: string,
     bookId: string,
   ) => Promise<Loan | null>
-  getLoanById: (loanId: string) => Promise<Loan>
+  getLoanById: (loanId: string) => Promise<Loan | null>
   updateLoan: (loan: Loan) => Promise<Loan>
   findLoans: () => Promise<FindLoans[]>
   findLoansByMemberId: (memberId: string) => Promise<FindLoans[]>

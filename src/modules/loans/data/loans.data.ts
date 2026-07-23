@@ -35,7 +35,7 @@ export const loansData: LoansRepository = {
 
   async getLoanById(loanId) {
     const [loan] = await db.select().from(loans).where(eq(loans.id, loanId))
-    return loan
+    return loan ?? null
   },
 
   async updateLoan(loan) {

@@ -1,4 +1,7 @@
-import { BusinessRuleError } from '@/shared/errors/error.shared.js'
+import {
+  BusinessRuleError,
+  NotFoundError,
+} from '@/shared/errors/error.shared.js'
 import { Loan } from '@/modules/loans/domain/loans.type.js'
 
 const LOANS_PER_MEMBER = 3
@@ -21,6 +24,10 @@ export const assertMemberIsWithinLoanLimit = (loansByMember: number) => {
       `Member reached maximum loan limit (${LOANS_PER_MEMBER})`,
     )
   }
+}
+export const assertLoanExists = (loan: Loan | null) => {
+  if (!loan) throw new NotFoundError('Loan not found')
+  return loan
 }
 
 export const ensureLoanNotExists = (loan: Loan | null) => {

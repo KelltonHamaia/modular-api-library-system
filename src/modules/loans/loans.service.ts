@@ -44,7 +44,8 @@ export const returnLoan = async (
   repository: LoansRepository = loansData,
 ) => {
   const loan = await repository.getLoanById(loanId)
-  const builtReturnedLoan = domain.buildReturnedLoan(loan)
+  const exists = domain.assertLoanExists(loan)
+  const builtReturnedLoan = domain.buildReturnedLoan(exists)
   const updated = await repository.updateLoan(builtReturnedLoan)
   const increased = await increaseAvailableCopy(updated.bookId)
   assertAvailableCopiesDecreased(increased)
