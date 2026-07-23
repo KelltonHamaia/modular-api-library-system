@@ -50,6 +50,7 @@ export const loansData: LoansRepository = {
   async findLoansByMemberId(memberId) {
     return await db
       .select({
+        id: loans.id,
         memberId: loans.memberId,
         title: books.title,
         returnDate: loans.returnDate,
@@ -63,6 +64,7 @@ export const loansData: LoansRepository = {
   async findLoans() {
     return await db
       .select({
+        id: loans.id,
         memberId: loans.memberId,
         title: books.title,
         returnDate: loans.returnDate,
@@ -72,6 +74,7 @@ export const loansData: LoansRepository = {
       .from(loans)
       .innerJoin(books, eq(loans.bookId, books.id))
       .groupBy(
+        loans.id,
         loans.memberId,
         books.title,
         loans.returnDate,

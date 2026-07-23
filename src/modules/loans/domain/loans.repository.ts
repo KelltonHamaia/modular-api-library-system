@@ -1,6 +1,7 @@
 import { Loan } from '@/modules/loans/domain/loans.type.js'
 type CreateLoan = Omit<Loan, 'id'>
 type FindLoans = {
+  id: string
   memberId: string
   title: string
   returnDate: Date | null

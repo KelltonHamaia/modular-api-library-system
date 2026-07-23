@@ -24,7 +24,8 @@ export const assertMemberIsWithinLoanLimit = (loansByMember: number) => {
 }
 
 export const ensureLoanNotExists = (loan: Loan | null) => {
-  if (loan) throw new BusinessRuleError('Only one loan per book is allowed.')
+  if (loan && !loan.returnDate)
+    throw new BusinessRuleError('Only one loan per book is allowed.')
 }
 
 export const buildNewLoan = (

@@ -1,7 +1,9 @@
 import {
-  countAvailableCopies,
   decreaseAvailableCopy,
   increaseAvailableCopy,
+  getBookById,
+  assertAvailableCopiesDecreased,
+  assertAvailableCopiesIncreased,
 } from '@/modules/books/index.js'
 import { loansData } from '@/modules/loans/data/loans.data.js'
 import * as domain from '@/modules/loans/domain/loans.domain.js'
@@ -13,23 +15,27 @@ export const createLoan = async (
   memberId: string,
   repository: LoansRepository = loansData,
 ) => {
-  await getActiveMemberById(memberId)
+  const [book] = await Promise.all([
+    getBookById(bookId),
+    getActiveMemberById(memberId),
+  ])
+
   const loanExists = await repository.findLoanByMemberIdAndBookId(
     memberId,
     bookId,
   )
-  domain.ensureLoanNotExists(loanExists)
-  const [loansByMember, availableCopies] = await Promise.all([
-    repository.countActiveLoansByMember(memberId),
-    countAvailableCopies(bookId),
-  ])
 
-  domain.assertBookHasAvailableCopy(availableCopies)
+  domain.ensureLoanNotExists(loanExists)
+
+  const loansByMember = await repository.countActiveLoansByMember(memberId)
   domain.assertMemberIsWithinLoanLimit(loansByMember)
+  domain.assertBookHasAvailableCopy(book.availableCopies)
 
   const buildLoan = domain.buildNewLoan(memberId, bookId)
   const newLoan = await repository.createLoan(buildLoan)
-  await decreaseAvailableCopy(bookId)
+  const decreasedBook = await decreaseAvailableCopy(bookId)
+  assertAvailableCopiesIncreased(decreasedBook)
+
   return { newLoan }
 }
 
@@ -40,7 +46,9 @@ export const returnLoan = async (
   const loan = await repository.getLoanById(loanId)
   const builtReturnedLoan = domain.buildReturnedLoan(loan)
   const updated = await repository.updateLoan(builtReturnedLoan)
-  await increaseAvailableCopy(updated.bookId)
+  const increased = await increaseAvailableCopy(updated.bookId)
+  assertAvailableCopiesDecreased(increased)
+
   return updated
 }
 

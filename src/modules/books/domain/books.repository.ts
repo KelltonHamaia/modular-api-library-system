@@ -8,6 +8,6 @@ export type BookRepository = {
   listBooks: () => Promise<Book[]>
   findBookById: (bookId: string) => Promise<Book | null>
   getTotalAvailableCopies: (bookId: string) => Promise<number>
-  decreaseAvailableCopy: (bookId: string) => Promise<Book>
+  decreaseAvailableCopy: (bookId: string) => Promise<Book | null>
   increaseAvailableCopy: (bookId: string) => Promise<Book | null>
 }
