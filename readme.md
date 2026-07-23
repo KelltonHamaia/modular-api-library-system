@@ -8,9 +8,9 @@ Logo, a idéia não era criar algo super mega complexo, mas sim estudar :D
 ## Stack
  
 - **Node.js** + **TypeScript**
-- **Express 5**
+- **Express**
 - **Drizzle ORM** + **PostgreSQL**
-- **Zod** para validação de entrada
+- **Zod** para validação de entrada de dados
 ## Arquitetura
  
 O projeto é organizado em módulos verticais (`books`, `members`, `loans`), cada um dividido em camadas com responsabilidade única:
