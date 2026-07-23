@@ -34,7 +34,7 @@ export const createLoan = async (
   const buildLoan = domain.buildNewLoan(memberId, bookId)
   const newLoan = await repository.createLoan(buildLoan)
   const decreasedBook = await decreaseAvailableCopy(bookId)
-  assertAvailableCopiesIncreased(decreasedBook)
+  assertAvailableCopiesDecreased(decreasedBook)
 
   return { newLoan }
 }
@@ -48,7 +48,7 @@ export const returnLoan = async (
   const builtReturnedLoan = domain.buildReturnedLoan(exists)
   const updated = await repository.updateLoan(builtReturnedLoan)
   const increased = await increaseAvailableCopy(updated.bookId)
-  assertAvailableCopiesDecreased(increased)
+  assertAvailableCopiesIncreased(increased)
 
   return updated
 }
