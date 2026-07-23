@@ -3,6 +3,7 @@
 API REST para gerenciamento de uma biblioteca — livros, membros e empréstimos — construída como exercício de **arquitetura modular** em Node.js/TypeScript.
  
 Este projeto foi meu primeiro mergulho prático em desenhar um backend por **capacidades de negócio** (módulos verticais) em vez de por camadas técnicas horizontais. O foco principal não foi "fazer funcionar rápido", e sim entender **onde cada regra deveria morar** e **como módulos deveriam se comunicar sem se acoplar**.
+Logo, a idéia não era criar algo super mega complexo, mas sim estudar :D
  
 ## Stack
  
