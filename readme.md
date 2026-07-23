@@ -65,6 +65,8 @@ modules/
 ## Como rodar
  
 ```bash
+# Subir container docker + postgres
+docker compose up -d
 # instalar dependências
 npm install
  
