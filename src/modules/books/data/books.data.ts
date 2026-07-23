@@ -28,10 +28,10 @@ export const bookData: BookRepository = {
 
   async getTotalAvailableCopies(bookId) {
     const [book] = await db
-      .select({ totalCopies: books.totalCopies })
+      .select({ availableCopies: books.availableCopies })
       .from(books)
       .where(eq(books.id, bookId))
-    return book.totalCopies
+    return book.availableCopies
   },
 
   async decreaseAvailableCopy(bookId) {
