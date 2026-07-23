@@ -17,6 +17,6 @@ export const calculateInitialAvailableCopies = (
 }
 
 export const assertBookExists = (book: Book | null): Book => {
-  if (!book) throw new NotFoundError()
+  if (!book) throw new NotFoundError('Book not found')
   return book
 }
